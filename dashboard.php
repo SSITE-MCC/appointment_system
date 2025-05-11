@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if (!isset($_SESSION['username'])) {
+    if (!isset($_SESSION['email'])) {
         header("Location: login.php"); 
         exit();
     }
@@ -20,7 +20,7 @@
 <body>
     <div class="dashboard">
         <header>
-            <h1> Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
+            <h1> Welcome, <?php echo htmlspecialchars($email); ?>!</h1>
         </header>
 
         <div class="topbar">

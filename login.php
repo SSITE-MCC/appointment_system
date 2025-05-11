@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="styles.css">-->
 </head>
 <body>
 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($emailErr) && empty($passwordErr)) {
-        $stmt = $conn->prepare("SELECT id, username, email, password FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT id, email, password FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
-                $_SESSION['username'] = $row['username'];
+                $_SESSION['email'] = $row['email'];
                 header("Location: dashboard.php");
                 exit();
             } else {
